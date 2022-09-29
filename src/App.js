@@ -1,5 +1,6 @@
 import { Suspense, lazy, Component } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import colors from "./config/colors";
 
 const Loading = () => <div>Loading...</div>;
 
@@ -11,7 +12,7 @@ const LazyWrapper = (Component) => (props) =>
   );
 
 const InitialLoad = LazyWrapper(lazy(() => import("./pages/InitialLoad")));
-// const Landing = LazyWrapper(lazy(() => import("./pages/Landing")));
+const Landing = LazyWrapper(lazy(() => import("./pages/Landing")));
 // const Login = LazyWrapper(lazy(() => import("./pages/Login")));
 // const Register = LazyWrapper(lazy(() => import("./pages/Register")));
 
@@ -19,12 +20,11 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<InitialLoad />}>
-          {/* <Route path="/welcome" element={<Landing />} /> */}
-          {/* <Route path="/signin" element={<Login />} /> */}
-          {/* <Route path="/signup" element={<Register />} /> */}
-          {/* <Route path="*" element={<div>Not found!</div>} /> */}
-        </Route>
+        <Route path="/" element={<InitialLoad />} />
+        <Route path="/welcome" element={<Landing />} />
+        {/* <Route path="/signin" element={<Login />} /> */}
+        {/* <Route path="/signup" element={<Register />} /> */}
+        {/* <Route path="*" element={<div>Not found!</div>} /> */}
       </Routes>
     </Router>
   );
