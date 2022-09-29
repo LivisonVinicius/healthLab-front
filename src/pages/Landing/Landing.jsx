@@ -12,12 +12,12 @@ export default function Landing() {
         <img src={logo} alt="logo" />
         <h1>Medical Reports Whenever You are</h1>
         <div>
-          <button className="button primary" onClick={() => navigate("/login")}>
+          <button className="button primary" onClick={() => navigate("/signin")}>
             Login
           </button>
           <button
             className="button secondary"
-            onClick={() => navigate("/register")}
+            onClick={() => navigate("/signup")}
           >
             New here? Register
           </button>

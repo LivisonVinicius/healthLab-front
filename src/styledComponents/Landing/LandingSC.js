@@ -22,8 +22,8 @@ export const Container = styled.div`
       width: 400px;
       height: 400px;
       z-index: 1;
-      left: 0px;
-      top: -80px;
+      left: -40px;
+      top: -140px;
     }
     h1 {
       font-size: 48px;

@@ -1,3 +1,3 @@
-import InitialLoad from "./InitialLoad";
+import InitialLoad from "./InitialLoad.jsx";
 
 export default InitialLoad;
