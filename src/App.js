@@ -13,7 +13,7 @@ const LazyWrapper = (Component) => (props) =>
 const InitialLoad = LazyWrapper(lazy(() => import("./pages/InitialLoad")));
 const Landing = LazyWrapper(lazy(() => import("./pages/Landing")));
 const Login = LazyWrapper(lazy(() => import("./pages/Login")));
-// const Register = LazyWrapper(lazy(() => import("./pages/Register")));
+const Register = LazyWrapper(lazy(() => import("./pages/Register")));
 
 export default function App() {
   return (
@@ -22,8 +22,8 @@ export default function App() {
         <Route path="/" element={<InitialLoad />} />
         <Route path="/welcome" element={<Landing />} />
         <Route path="/signin" element={<Login />} />
-        {/* <Route path="/signup" element={<Register />} /> */}
-        {/* <Route path="*" element={<div>Not found!</div>} /> */}
+        <Route path="/signup" element={<Register />} />
+        <Route path="*" element={<div>Not found!</div>} />
       </Routes>
     </Router>
   );

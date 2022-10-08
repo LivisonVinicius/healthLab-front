@@ -7,7 +7,6 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 80px;
   h4 {
     margin-bottom: 20px;
     margin-top: -20px;
@@ -23,7 +22,7 @@ export const Form = styled.form`
     width: 88%;
     height: 55px;
     background: #ffffff;
-    font-size: 22px;
+    font-size: 18px;
     line-height: 33px;
     color: #000000;
     padding-left: 17px;

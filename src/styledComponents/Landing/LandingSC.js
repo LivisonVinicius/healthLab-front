@@ -38,9 +38,11 @@ export const Container = styled.div`
     div {
       width: 100%;
       height: 120px;
-      position: absolute;
-      left: 15%;
-      bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 500px;
     }
   }
   .button {
@@ -54,7 +56,7 @@ export const Container = styled.div`
     text-align: center;
     color: ${colors.white};
     border-radius: 50px;
-    margin-bottom: 10px;
+    margin-top: 10px;
   }
   .primary {
     background-color: ${colors.primary};
