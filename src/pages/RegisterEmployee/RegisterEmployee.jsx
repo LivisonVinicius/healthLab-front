@@ -2,19 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import styled from "styled-components";
 import colors from "../../config/colors";
-import registeramico from "../../assets/images/register-amico.png";
-import RegisterForms from "../../components/authComponents/registerForms.jsx";
-import { useEffect } from "react";
+import registeramico from "../../assets/images/registerEmployee.png";
+import RegisterEmployeeForms from "../../components/authComponents/registerEmployeeForms.jsx";
 
 export default function Register() {
   const navigate = useNavigate();
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  console.log(userData);
-  useEffect(() => {
-    if (userData !== null) {
-      navigate("/home");
-    }
-  }, []);
   return (
     <Container>
       <IoIosArrowBack onClick={() => navigate(-1)} />
@@ -24,7 +16,7 @@ export default function Register() {
         src={registeramico}
         alt="Ilustration login"
       />
-      <RegisterForms />
+      <RegisterEmployeeForms />
     </Container>
   );
 }

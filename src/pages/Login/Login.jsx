@@ -4,9 +4,16 @@ import styled from "styled-components";
 import colors from "../../config/colors";
 import loginamico from "../../assets/images/login-amico.png";
 import LoginForms from "../../components/authComponents/loginForms.jsx";
+import { useEffect } from "react";
 
 export default function Login() {
   const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  useEffect(() => {
+    if (userData !== null) {
+      navigate("/home");
+    }
+  }, []);
   return (
     <Container>
       <IoIosArrowBack onClick={() => navigate(-1)} />

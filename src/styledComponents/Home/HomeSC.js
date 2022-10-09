@@ -8,40 +8,34 @@ export const Container = styled.div`
   height: 100vh;
   flex-direction: column;
   background-color: ${colors.white};
+  > svg {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    color: ${colors.primary};
+  }
   > img {
     position: absolute;
-    height: 250px;
+    height: 300px;
     width: 300px;
     left: -25px;
-    top: -75px;
+    top: -100px;
   }
-  /* .logoBox {
-    background-color: #1f1f1f;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .welcomeBox {
     width: 90%;
-    height: 132px;
-    border-radius: 5px;
-    margin-top: 50px;
-    div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        91.97deg,
-        rgba(1, 42, 255, 0.37) 1.48%,
-        rgba(31, 31, 31, 0.47) 98.17%
-      );
+    margin-top: 100px;
+    h1 {
+      font-size: 30px;
+      font-weight: 600;
     }
-    img {
-      width: 300px;
-      height: 220px;
-      position: absolute;
+    h2 {
+      font-size: 18px;
+      font-weight: 500;
+      margin-top: 5px;
     }
-  } */
+  }
   .descriptionBox {
     width: 90%;
     display: flex;
@@ -49,7 +43,7 @@ export const Container = styled.div`
     align-items: center;
     height: 90px;
     flex-direction: column;
-    margin-top: 100px;
+    margin-top: 40px;
     h2 {
       text-align: left;
       width: 100%;

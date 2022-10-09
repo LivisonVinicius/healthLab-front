@@ -9,22 +9,23 @@ import {
 } from "../../styledComponents/Options/OptionSC";
 
 export default function AdminOptions() {
+  const navigate = useNavigate();
   return (
     <Container>
       <h1>Select:</h1>
       <OptionContainer>
-        <h3>Your ongoing medical consultations</h3>
+        <h3>Your ongoing medical appointments</h3>
         <FiClock />
       </OptionContainer>
       <OptionContainer>
-        <h3>Your medical consultation history</h3>
+        <h3>Your medical appointment history</h3>
         <AiOutlineFileDone />
       </OptionContainer>
       <OptionContainer>
-        <h3>Start a new consultation</h3>
+        <h3>Start a new appointment</h3>
         <GiTalk />
       </OptionContainer>
-      <OptionContainer>
+      <OptionContainer onClick={() => navigate("/signupEmployee")}>
         <h3>Register a new employee</h3>
         <AiOutlineUserAdd />
       </OptionContainer>

@@ -40,6 +40,18 @@ export const Form = styled.form`
       letter-spacing: 0.4px;
     }
   }
+  select {
+    width: 88%;
+    height: 55px;
+    border-style: solid;
+    border-width: 2px;
+    border-right: none;
+    border-top: none;
+    border-left: none;
+    font-weight: 700;
+    background: #ffffff;
+    margin-bottom: 24px;
+  }
   button {
     border: none;
     width: 88%;

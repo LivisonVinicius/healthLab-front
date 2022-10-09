@@ -9,15 +9,16 @@ import {
 } from "../../styledComponents/Options/OptionSC";
 
 export default function PatientOptions() {
+  console.log("sou paciente");
   return (
     <Container>
       <h1>Select:</h1>
       <OptionContainer>
-        <h3>Your ongoing medical consultations</h3>
+        <h3>Your ongoing medical appointments</h3>
         <FiClock />
       </OptionContainer>
       <OptionContainer>
-        <h3>Your medical consultation history</h3>
+        <h3>Your medical appointment history</h3>
         <AiOutlineFileDone />
       </OptionContainer>
     </Container>

@@ -35,3 +35,17 @@ body::-webkit-scrollbar {
   position: absolute;
   left: -9999px;
 }
+
+select:focus {
+  outline: none;
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loadingContainer img {
+  width: 100%;
+  height: 100vh;
+}

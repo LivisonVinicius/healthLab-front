@@ -15,6 +15,12 @@ export default function RegisterForms() {
   const userRef = useRef();
   const errRef = useRef();
 
+  const [role, setRole] = useState("doctor");
+
+  function handleChange(event) {
+    setRole(event.target.value);
+  }
+
   const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
@@ -31,6 +37,10 @@ export default function RegisterForms() {
   const [validCpf, setValidCpf] = useState(false);
   const [cpfFocus, setCpfFocus] = useState(false);
 
+  const [speciality, setSpeciality] = useState("");
+  const [validSpeciality, setValidSpeciality] = useState(false);
+  const [specialityFocus, setSpecialityFocus] = useState(false);
+
   const [errMsg, setErrMsg] = useState("");
 
   const navigate = useNavigate();
@@ -42,6 +52,10 @@ export default function RegisterForms() {
   useEffect(() => {
     setValidName(USER_REGEX.test(user));
   }, [user]);
+
+  useEffect(() => {
+    setValidSpeciality(USER_REGEX.test(speciality));
+  }, [speciality]);
 
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
@@ -65,6 +79,7 @@ export default function RegisterForms() {
     const v2 = PWD_REGEX.test(pwd);
     const v3 = EMAIL_REGEX.test(email);
     const v4 = CPF_REGEX.test(cpf);
+    const v5 = USER_REGEX.test(speciality);
     if (!v1) {
       setErrMsg("Invalid name");
       return;
@@ -81,15 +96,24 @@ export default function RegisterForms() {
     if (!v4) {
       setErrMsg("Invalid CPF");
     }
+    if (!v5) {
+      setErrMsg("Invalid speciality");
+    }
     try {
-      const postObj = { name: user, email, password: pwd, cpf: cpf };
-      await axios.post(`${backUrl}signup/patient`, postObj);
+      const postObj = {
+        name: user,
+        email,
+        password: pwd,
+        cpf: cpf,
+        speciality,
+      };
+      await axios.post(`${backUrl}signup/${role}`, postObj);
       setUser("");
       setPwd("");
       setCpf("");
       setEmail("");
+      setRole("");
       alert("User created");
-      navigate("/login");
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No response from the server");
@@ -134,6 +158,10 @@ export default function RegisterForms() {
         <FaInfoCircle />
         Must be a valid name
       </h4>
+      <select onChange={handleChange}>
+        <option value="doctor">Doctor</option>
+        <option value="technician">Technician</option>
+      </select>
       <input
         type="email"
         id="email"
@@ -179,7 +207,29 @@ export default function RegisterForms() {
         a special character and a number.
         <br />
       </h4>
-
+      <input
+        type="text"
+        id="speciality"
+        onChange={(e) => setSpeciality(e.target.value)}
+        value={speciality}
+        required
+        aria-invalid={validSpeciality ? "false" : "true"}
+        aria-describedby="uidnote"
+        onFocus={() => setSpecialityFocus(true)}
+        onBlur={() => setSpecialityFocus(false)}
+        placeholder="speciality"
+      />
+      <h4
+        id="uidnote"
+        className={
+          specialityFocus && speciality && !validSpeciality
+            ? "instructions"
+            : "offscreen"
+        }
+      >
+        <FaInfoCircle />
+        Must be a valid speciality
+      </h4>
       <input
         type="text"
         id="cpf"
@@ -202,7 +252,13 @@ export default function RegisterForms() {
       <button
         type="submit"
         disabled={
-          !validName || !validPwd || !validCpf || !validEmail ? true : false
+          !validName ||
+          !validPwd ||
+          !validCpf ||
+          !validEmail ||
+          !validSpeciality
+            ? true
+            : false
         }
       >
         {"Register"}

@@ -40,18 +40,12 @@ export default function LoginForms() {
       navigate("/home");
     } catch (err) {
       if (!err?.response) {
-        setErrMsg("Sem resposta do servidor");
-      }
-      if (err.response?.status === 400) {
-        setErrMsg("E-mail ou senha incorretos");
+        setErrMsg("No response from the server");
       }
       if (err.response?.status === 401) {
-        setErrMsg("Não autorizado");
-      }
-      if (err.response?.status === 404) {
-        setErrMsg("Usuário não encontrado");
+        setErrMsg("Email or password invalid");
       } else {
-        setErrMsg("Falha no login");
+        setErrMsg("Error trying to login");
       }
       errRef.current.focus();
     }

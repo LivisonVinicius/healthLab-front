@@ -13,15 +13,15 @@ export default function DoctorOptions() {
     <Container>
       <h1>Select:</h1>
       <OptionContainer>
-        <h3>Your ongoing medical consultations</h3>
+        <h3>Your ongoing medical appointmentss</h3>
         <FiClock />
       </OptionContainer>
       <OptionContainer>
-        <h3>Your medical consultation history</h3>
+        <h3>Your medical appointments history</h3>
         <AiOutlineFileDone />
       </OptionContainer>
       <OptionContainer>
-        <h3>Start a new consultation</h3>
+        <h3>Start a new appointments</h3>
         <GiTalk />
       </OptionContainer>
     </Container>

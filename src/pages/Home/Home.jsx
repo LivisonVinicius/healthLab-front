@@ -1,4 +1,3 @@
-import logo from "../../assets/images/initialLoadLogo.png";
 import { useNavigate } from "react-router-dom";
 import { Container } from "../../styledComponents/Home/HomeSC";
 import DoctorOptions from "../../components/homeComponents/DoctorOptions";
@@ -6,14 +5,33 @@ import AdminOptions from "../../components/homeComponents/AdminOptions";
 import PatientOptions from "../../components/homeComponents/PatientOptions";
 import TechnicianOptions from "../../components/homeComponents/TechnicianOption";
 import transparentLogo from "../../assets/images/health lab-logos_transparent.png";
+import { RiLogoutBoxLine } from "react-icons/ri";
+import { useEffect, useState } from "react";
 export default function Home() {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("userData"));
-  if (!userData) navigate("/");
-  const role = userData.role;
+  const [name, setName] = useState("");
+  const [role, setRole] = useState("");
+  function logOut() {
+    localStorage.clear();
+    navigate("/");
+  }
+  useEffect(() => {
+    console.log(userData);
+    if (userData === null) {
+      navigate("/");
+    } else {
+      setName(userData.name);
+      setRole(userData.role);
+    }
+  }, [name, role]);
   return (
     <Container>
       <img src={transparentLogo} alt="logo" />
+      <RiLogoutBoxLine onClick={() => logOut()} />
+      <div className="welcomeBox">
+        <h1>Hello, {name}</h1>
+      </div>
       <div className="descriptionBox">
         <h2>Description</h2>
         <p>
