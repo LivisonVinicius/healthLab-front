@@ -1,4 +1,4 @@
-import { Suspense, lazy, Component } from "react";
+import { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const Loading = () => <div>Loading...</div>;
@@ -14,6 +14,7 @@ const InitialLoad = LazyWrapper(lazy(() => import("./pages/InitialLoad")));
 const Landing = LazyWrapper(lazy(() => import("./pages/Landing")));
 const Login = LazyWrapper(lazy(() => import("./pages/Login")));
 const Register = LazyWrapper(lazy(() => import("./pages/Register")));
+const Home = LazyWrapper(lazy(() => import("./pages/Home")));
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/welcome" element={<Landing />} />
         <Route path="/signin" element={<Login />} />
         <Route path="/signup" element={<Register />} />
+        <Route path="/home" element={<Home />} />
         <Route path="*" element={<div>Not found!</div>} />
       </Routes>
     </Router>

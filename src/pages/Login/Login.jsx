@@ -54,6 +54,7 @@ const Container = styled.main`
     line-height: 16px;
     text-align: center;
     color: ${colors.secondary};
+    margin-top: 100px;
   }
   form {
     margin-top: 75px;

@@ -4,13 +4,13 @@ import { FaInfoCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Form } from "../../styledComponents/Authorization/AutorizationSC";
+import { backUrl } from "../../config/constants";
 
 const USER_REGEX =
   /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const CPF_REGEX = /([0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2})/;
-
 export default function RegisterForms() {
   const userRef = useRef();
   const errRef = useRef();
@@ -66,9 +66,7 @@ export default function RegisterForms() {
     const v3 = EMAIL_REGEX.test(email);
     const v4 = CPF_REGEX.test(cpf);
     if (!v1) {
-      setErrMsg(
-        "Nome inválido, nome deve começar com uma letra e ter entre 3 - 23 caracteres "
-      );
+      setErrMsg("Nome inválido");
       return;
     }
     if (!v2) {
@@ -81,26 +79,26 @@ export default function RegisterForms() {
       setErrMsg("E-mail inválido, insira um e-mail válido");
     }
     if (!v4) {
-      setErrMsg("Imagem inválida");
+      setErrMsg("CPF inválido");
     }
-    //     try {
-    //       const postObj = { name: user, email, password: pwd, cpf: cpf };
-    //       const response = await axios.post(`${backUrl}signup`, postObj);
-    //       setUser("");
-    //       setPwd("");
-    //       setCpf("");
-    //       setEmail("");
-    //       navigate("/");
-    //     } catch (err) {
-    //       if (!err?.response) {
-    //         setErrMsg("Sem resposta do servidor");
-    //       } else if (err.response?.status === 409) {
-    //         setErrMsg("Usuário cadastrado / Email Cadastrado");
-    //       } else {
-    //         setErrMsg("Falha no registro");
-    //       }
-    //       errRef.current.focus();
-    //     }
+    try {
+      const postObj = { name: user, email, password: pwd, cpf: cpf };
+      await axios.post(`${backUrl}signup/patient`, postObj);
+      setUser("");
+      setPwd("");
+      setCpf("");
+      setEmail("");
+      navigate("/login");
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("Sem resposta do servidor");
+      } else if (err.response?.status === 409) {
+        setErrMsg("Usuário cadastrado / Email Cadastrado");
+      } else {
+        setErrMsg("Falha no registro");
+      }
+      errRef.current.focus();
+    }
   };
 
   return (

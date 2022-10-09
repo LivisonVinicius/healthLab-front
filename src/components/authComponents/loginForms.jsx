@@ -3,6 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Form } from "../../styledComponents/Authorization/AutorizationSC";
+import { backUrl } from "../../config/constants";
 
 export default function LoginForms() {
   const emailRef = useRef();
@@ -23,38 +24,37 @@ export default function LoginForms() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    //   try {
-    //     const response = await axios.post(`${backUrl}signin`, {
-    //       email,
-    //       password: pwd,
-    //     });
-    //     const token = response?.data?.token;
-    //     const name = response?.data?.name;
-    //     const photo = response?.data?.userPhoto;
-    //     const userId = response?.data?.userId;
-    //     const objPost = { name, token, photo, userId };
-    //     localStorage.setItem("userData", JSON.stringify(objPost));
-    //     setEmail("");
-    //     setPwd("");
-    //     navigate("/timeline");
-    //   } catch (err) {
-    //     if (!err?.response) {
-    //       setErrMsg("Sem resposta do servidor");
-    //     }
-    //     if (err.response?.status === 400) {
-    //       setErrMsg("E-mail ou senha incorretos");
-    //     }
-    //     if (err.response?.status === 401) {
-    //       setErrMsg("Não autorizado");
-    //     }
-    //     if (err.response?.status === 404) {
-    //       setErrMsg("Usuário não encontrado");
-    //     } else {
-    //       setErrMsg("Falha no login");
-    //     }
-    //     errRef.current.focus();
-    //   }
+    navigate("/home");
+    try {
+      const response = await axios.post(`${backUrl}signin`, {
+        email,
+        password: pwd,
+      });
+      const token = response?.data?.token;
+      const name = response?.data?.name;
+      const role = response?.data?.role;
+      const objPost = { name, token, role };
+      localStorage.setItem("userData", JSON.stringify(objPost));
+      setEmail("");
+      setPwd("");
+      navigate("/home");
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("Sem resposta do servidor");
+      }
+      if (err.response?.status === 400) {
+        setErrMsg("E-mail ou senha incorretos");
+      }
+      if (err.response?.status === 401) {
+        setErrMsg("Não autorizado");
+      }
+      if (err.response?.status === 404) {
+        setErrMsg("Usuário não encontrado");
+      } else {
+        setErrMsg("Falha no login");
+      }
+      errRef.current.focus();
+    }
   };
 
   return (
