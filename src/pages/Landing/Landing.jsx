@@ -3,16 +3,15 @@ import logo from "../../assets/images/initialLoadLogo.png";
 import { useNavigate } from "react-router-dom";
 import { Container } from "../../styledComponents/Landing/LandingSC";
 import { useEffect } from "react";
+import { userData } from "../../config/constants";
 
 export default function Landing() {
   const navigate = useNavigate();
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  console.log(userData);
   useEffect(() => {
-    if (userData !== null) {
+    if (userData() !== null && localStorage.length > 0) {
       navigate("/home");
     }
-  }, []);
+  }, [userData]);
   return (
     <Container bg={BGImage}>
       <div>

@@ -25,6 +25,9 @@ const Home = LazyWrapper(lazy(() => import("./pages/Home")));
 const RegisterEmployee = LazyWrapper(
   lazy(() => import("./pages/RegisterEmployee"))
 );
+const CreateAppointment = LazyWrapper(
+  lazy(() => import("./pages/CreateAppointment"))
+);
 
 export default function App() {
   return (
@@ -36,6 +39,7 @@ export default function App() {
         <Route path="/signup" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/signupEmployee" element={<RegisterEmployee />} />
+        <Route path="/createAppointment" element={<CreateAppointment />} />
         <Route path="*" element={<div>Not found!</div>} />
       </Routes>
     </Router>

@@ -21,7 +21,7 @@ export default function AdminOptions() {
         <h3>Your medical appointment history</h3>
         <AiOutlineFileDone />
       </OptionContainer>
-      <OptionContainer>
+      <OptionContainer onClick={() => navigate("/createAppointment")}>
         <h3>Start a new appointment</h3>
         <GiTalk />
       </OptionContainer>

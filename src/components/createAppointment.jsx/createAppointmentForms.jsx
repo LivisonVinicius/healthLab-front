@@ -4,15 +4,12 @@ import { FaInfoCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Form } from "../../styledComponents/Authorization/AutorizationSC";
-import { backUrl, config } from "../../config/constants";
+import { backUrl } from "../../config/constants";
 
-const USER_REGEX =
-  /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const CPF_REGEX = /([0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2})/;
-export default function RegisterForms() {
-  const userRef = useRef();
+
+export default function CreateAppointmentForms() {
+  const patientCPFRef = useRef();
   const errRef = useRef();
 
   const [role, setRole] = useState("doctor");
@@ -21,100 +18,46 @@ export default function RegisterForms() {
     setRole(event.target.value);
   }
 
-  const [user, setUser] = useState("");
-  const [validName, setValidName] = useState(false);
-  const [userFocus, setUserFocus] = useState(false);
-
-  const [pwd, setPwd] = useState("");
-  const [validPwd, setValidPwd] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
-
-  const [email, setEmail] = useState("");
-  const [validEmail, setValidEmail] = useState(false);
-  const [emailFocus, setEmailFocus] = useState(false);
-
-  const [cpf, setCpf] = useState("");
-  const [validCpf, setValidCpf] = useState(false);
-  const [cpfFocus, setCpfFocus] = useState(false);
-
-  const [speciality, setSpeciality] = useState("");
-  const [validSpeciality, setValidSpeciality] = useState(false);
-  const [specialityFocus, setSpecialityFocus] = useState(false);
+  const [patientCPF, setPatientCPF] = useState("");
+  const [validPatientCPF, setValidPatientCPF] = useState(false);
+  const [patientCPFFocus, setPatientCPFFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
 
-  const navigate = useNavigate();
-
   useEffect(() => {
-    userRef.current.focus();
+    patientCPFRef.current.focus();
   }, []);
 
   useEffect(() => {
-    setValidName(USER_REGEX.test(user));
-  }, [user]);
+    setValidPatientCPF(CPF_REGEX.test(patientCPF));
+  }, [patientCPF]);
 
-  useEffect(() => {
-    setValidSpeciality(USER_REGEX.test(speciality));
-  }, [speciality]);
-
-  useEffect(() => {
-    setValidEmail(EMAIL_REGEX.test(email));
-  }, [email]);
-
-  useEffect(() => {
-    setValidPwd(PWD_REGEX.test(pwd));
-  }, [pwd]);
-
-  useEffect(() => {
-    setValidCpf(CPF_REGEX.test(cpf));
-  }, [cpf]);
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, email, pwd, cpf]);
+  }, [patientCPF]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const v1 = USER_REGEX.test(user);
-    const v2 = PWD_REGEX.test(pwd);
-    const v3 = EMAIL_REGEX.test(email);
-    const v4 = CPF_REGEX.test(cpf);
-    const v5 = USER_REGEX.test(speciality);
+    const v1 = CPF_REGEX.test(patientCPF);
     if (!v1) {
-      setErrMsg("Invalid name");
+      setErrMsg("Invalid cpf");
       return;
-    }
-    if (!v2) {
-      setErrMsg(
-        "Invalid password, password must contain lower case letter, upper case letter,special characters, number and length between 8-24"
-      );
-      return;
-    }
-    if (!v3) {
-      setErrMsg("Invalid email");
-    }
-    if (!v4) {
-      setErrMsg("Invalid CPF");
-    }
-    if (!v5) {
-      setErrMsg("Invalid speciality");
     }
     try {
       const postObj = {
-        name: user,
-        email,
-        password: pwd,
-        cpf: cpf,
+        patientCPF,
         speciality,
+        technicianId,
+      
       };
-      await axios.post(`${backUrl}signup/${role}`, postObj, config);
-      setUser("");
+      await axios.post(`${backUrl}createAppointment/${role}`, postObj);
+      setPatientCPF("");
       setPwd("");
       setCpf("");
       setEmail("");
       setRole("");
-      setSpeciality("");
-      alert("User created");
+      alert("Appointment created");
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No response from the server");
@@ -138,22 +81,24 @@ export default function RegisterForms() {
       </h2>
       <input
         type="text"
-        id="username"
-        ref={userRef}
+        id="patientCPF"
+        ref={patientCPFRef}
         autoComplete="off"
-        onChange={(e) => setUser(e.target.value)}
-        value={user}
+        onChange={(e) => setPatientCPF(e.target.value)}
+        value={patientCPF}
         required
         aria-invalid={validName ? "false" : "true"}
         aria-describedby="uidnote"
-        onFocus={() => setUserFocus(true)}
-        onBlur={() => setUserFocus(false)}
+        onFocus={() => setPatientCPFFocus(true)}
+        onBlur={() => setPatientCPFFocus(false)}
         placeholder="name"
       />
       <h4
         id="uidnote"
         className={
-          userFocus && user && !validName ? "instructions" : "offscreen"
+          patientCPFFocus && patientCPF && !validPatientCPF
+            ? "instructions"
+            : "offscreen"
         }
       >
         <FaInfoCircle />

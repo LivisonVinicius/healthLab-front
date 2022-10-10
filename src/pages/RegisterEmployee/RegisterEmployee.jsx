@@ -4,9 +4,16 @@ import styled from "styled-components";
 import colors from "../../config/colors";
 import registeramico from "../../assets/images/registerEmployee.png";
 import RegisterEmployeeForms from "../../components/authComponents/registerEmployeeForms.jsx";
+import { useEffect } from "react";
+import { userData } from "../../config/constants";
 
-export default function Register() {
+export default function RegisterEmployee() {
   const navigate = useNavigate();
+  useEffect(() => {
+    if (userData === null) {
+      navigate("/");
+    }
+  }, [userData]);
   return (
     <Container>
       <IoIosArrowBack onClick={() => navigate(-1)} />

@@ -9,7 +9,7 @@ import {
 } from "../../styledComponents/Options/OptionSC";
 
 export default function PatientOptions() {
-  console.log("sou paciente");
+  const navigate = useNavigate();
   return (
     <Container>
       <h1>Select:</h1>

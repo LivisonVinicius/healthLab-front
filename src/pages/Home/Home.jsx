@@ -7,9 +7,9 @@ import TechnicianOptions from "../../components/homeComponents/TechnicianOption"
 import transparentLogo from "../../assets/images/health lab-logos_transparent.png";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { useEffect, useState } from "react";
+import { userData } from "../../config/constants";
 export default function Home() {
   const navigate = useNavigate();
-  const userData = JSON.parse(localStorage.getItem("userData"));
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   function logOut() {
@@ -17,14 +17,13 @@ export default function Home() {
     navigate("/");
   }
   useEffect(() => {
-    console.log(userData);
-    if (userData === null) {
+    if (userData() === null) {
       navigate("/");
     } else {
-      setName(userData.name);
-      setRole(userData.role);
+      setName(userData().name);
+      setRole(userData().role);
     }
-  }, [name, role]);
+  }, [name, role, userData]);
   return (
     <Container>
       <img src={transparentLogo} alt="logo" />

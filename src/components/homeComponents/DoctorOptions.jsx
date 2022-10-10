@@ -9,6 +9,7 @@ import {
 } from "../../styledComponents/Options/OptionSC";
 
 export default function DoctorOptions() {
+  const navigate = useNavigate();
   return (
     <Container>
       <h1>Select:</h1>
@@ -20,7 +21,7 @@ export default function DoctorOptions() {
         <h3>Your medical appointments history</h3>
         <AiOutlineFileDone />
       </OptionContainer>
-      <OptionContainer>
+      <OptionContainer onClick={() => navigate("/createAppointment")}>
         <h3>Start a new appointments</h3>
         <GiTalk />
       </OptionContainer>

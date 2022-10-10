@@ -8,6 +8,7 @@ import {
 } from "../../styledComponents/Options/OptionSC";
 
 export default function TechnicianOptions() {
+  const navigate = useNavigate();
   return (
     <Container>
       <h1>Select:</h1>

@@ -21,7 +21,9 @@ export const Container = styled.div`
     );
   }
   img {
-    width: 140%;
+    position: absolute;
+    top: 20%;
+    width: 100%;
     height: 60%;
   }
 `;
